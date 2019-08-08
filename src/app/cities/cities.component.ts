@@ -136,7 +136,7 @@ export class CitiesComponent implements OnInit, AfterViewInit {
 
   saveElement() {
     this.selectedEdit = undefined;
-    this.textTitle = 'Adicionar Ciudad';
+    this.textTitle = 'Agregar Ciudad';
     this.printCreate();
     this.clearFieldError();
   }

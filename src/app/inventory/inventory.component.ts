@@ -210,7 +210,7 @@ export class InventoryComponent implements OnInit, AfterViewInit {
 
   saveElement() {
     this.selectedEdit = undefined;
-    this.textTitle = 'Adicionar Ingrediente';
+    this.textTitle = 'Agregar Ingrediente';
     this.printCreate();
     this.clearFieldError();
   }

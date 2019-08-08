@@ -248,7 +248,7 @@ export class NewInvoiceComponent implements OnInit, AfterViewInit {
   saveElement() {
     this.productsSelected = [];
     this.selectedEdit = undefined;
-    this.textTitle = 'Adicionar Factura';
+    this.textTitle = 'Agregar Factura';
     this.printCreate();
     this.clearFieldError();
   }

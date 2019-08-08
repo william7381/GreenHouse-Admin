@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       res => {
         // @ts-ignore
         if (res.value) {
-          this.router.navigateByUrl(MyRoutes.menuAdmin);
+          this.router.navigateByUrl(MyRoutes.menuAdmin + '/' + MyRoutes.menu);
           this.myHttp.userInto = true;
         } else {
           user.value = pass.value = '';

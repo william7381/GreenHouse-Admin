@@ -265,7 +265,7 @@ export class NewProviderComponent implements OnInit, AfterViewInit {
 
   saveElement() {
     this.selectedEdit = undefined;
-    this.textTitle = 'Adicionar Proveedor';
+    this.textTitle = 'Agregar Proveedor';
     this.printCreate();
     this.clearFieldError();
   }

@@ -137,7 +137,7 @@ export class TypesPlateComponent implements OnInit, AfterViewInit {
 
   saveElement() {
     this.selectedEdit = undefined;
-    this.textTitle = 'Adicionar Tipo de Plato';
+    this.textTitle = 'Agregar Tipo de Plato';
     this.printCreate();
     this.clearFieldError();
   }

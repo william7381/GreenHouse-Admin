@@ -13,6 +13,6 @@ export class AppComponent {
   itemsPerPageLabel = ' Tabla';
 
   constructor(router: Router) {
-    router.navigateByUrl(MyRoutes.menuAdmin + '/' + MyRoutes.cities);
+    router.navigateByUrl(MyRoutes.menuAdmin + '/' + MyRoutes.menu);
   }
 }

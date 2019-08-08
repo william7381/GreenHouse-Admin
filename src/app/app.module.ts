@@ -26,7 +26,7 @@ import {VerifyLoginGuard} from './verifyLogin/verify-login.guard';
 const myRouters: Route[] = [
   {path: '', pathMatch: 'full', redirectTo: MyRoutes.login},
   {path: MyRoutes.login, component: LoginComponent},
-  {path: MyRoutes.menuAdmin, component: MainComponent, //canActivate: [VerifyLoginGuard],
+  {path: MyRoutes.menuAdmin, component: MainComponent, canActivate: [VerifyLoginGuard],
     children: [
       {path: MyRoutes.menu, component: MenuComponent},
       {path: MyRoutes.newInvoice, component: NewInvoiceComponent},

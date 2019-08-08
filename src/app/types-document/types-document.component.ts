@@ -138,7 +138,7 @@ export class TypesDocumentComponent implements OnInit, AfterViewInit {
 
   saveElement() {
     this.selectedEdit = undefined;
-    this.textTitle = 'Adicionar Tipo de Documento';
+    this.textTitle = 'Agregar Tipo de Documento';
     this.printCreate();
     this.clearFieldError();
   }

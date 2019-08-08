@@ -23,7 +23,7 @@ export class Constants {
   static ITEMS_TABLE_INVOICES = 'Facturas ' + Constants.ITEMS_FOR_PAGE_TITLE;
   static COD_ERRORS: Error[] = [
     {code: 1, value: 'El nombre ya esta en uso, debe digitar uno diferente'},
-    {code: 1, value: 'Este dni ya se encuentra registrado'},
+    {code: 2, value: 'Este dni ya se encuentra registrado'},
   ];
 
   static getDateFromFormatString(format: string): Date {

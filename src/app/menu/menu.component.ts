@@ -279,7 +279,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   saveElement() {
     this.selectedEdit = undefined;
-    this.textTitle = 'Adicionar Menú';
+    this.textTitle = 'Agregar Menú';
     this.printCreate();
     this.clearFieldError();
   }
