@@ -1,0 +1,19 @@
+<div id="div-login">
+  <h1>Green House</h1>
+  <div class="card" id="div-content">
+    <div class="form-group">
+      <label for="inputUser">Nombre de usuario:</label>
+      <input #user type="text" class="form-control" id="inputUser" placeholder="Usuario" value="">
+      <br>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword">Contraseña:</label>
+      <input #pass type="password" class="form-control" id="inputPassword" placeholder="Contraseña" value="">
+      <br><br>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary" (click)="validateUser(user, pass)">Ingresar</button>
+      <button class="btn btn-danger ml-3" (click)="clearForm(user, pass)">Cancelar</button>
+    </div>
+  </div>
+</div>

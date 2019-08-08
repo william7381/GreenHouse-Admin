@@ -1,0 +1,12 @@
+aside button {
+  width: 30vh;
+}
+
+.row {
+  margin-bottom: 0.5em;
+}
+
+.toggle-border-color {
+  border-color:#343a40!important;
+}
+

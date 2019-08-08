@@ -1,0 +1,202 @@
+<div id="div-main-components">
+  <h2 class="text-center mb-5">Administrar Factura</h2>
+  <form>
+    <br>
+    <div class="form-group ml-5">
+      <button type="button" (click)="saveElement()" class="btn btn-primary mr-3 float-right" data-toggle="modal"
+        data-target="#exampleModalScrollable">
+        Agregar Factura
+      </button>
+      <div class="form-inline">
+        Buscar: <input #iSearch class="form-control input-search" type="text" name="searchTerm" (input)="search(iSearch.value)"
+          [(ngModel)]="searchTerm" />
+      </div>
+    </div>
+
+    <table mat-table [dataSource]="itemsTable">
+
+      <ng-container matColumnDef="po">
+        <th id="th-positions" mat-header-cell *matHeaderCellDef> #</th>
+        <td mat-cell *matCellDef="let i = index" [attr.data-index]="i"> {{i+1}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="iva">
+        <th class="th-e" mat-header-cell *matHeaderCellDef> IVA</th>
+        <td mat-cell *matCellDef="let element"> {{element.iva}}</td>
+      </ng-container>
+      <ng-container matColumnDef="ff">
+        <th class="th-ef" mat-header-cell *matHeaderCellDef> Fecha de Facturacion</th>
+        <td mat-cell *matCellDef="let element">
+          {{constants.getFormatDateToShow(constants.getDateFromFormatString(element.fechaFacturacion))}}</td>
+      </ng-container>
+      <ng-container matColumnDef="nc">
+        <th class="th-e" mat-header-cell *matHeaderCellDef> Cliente</th>
+        <td mat-cell *matCellDef="let element"> {{element.nombres}}</td>
+      </ng-container>
+      <ng-container matColumnDef="dni">
+        <th class="th-e" mat-header-cell *matHeaderCellDef> Dni Cliente</th>
+        <td mat-cell *matCellDef="let element"> {{element.dni}}</td>
+      </ng-container>
+      <ng-container matColumnDef="te">
+        <th class="th-e" mat-header-cell *matHeaderCellDef> Teléfono</th>
+        <td mat-cell *matCellDef="let element"> {{element.telefono}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pt">
+        <th class="th-e" mat-header-cell *matHeaderCellDef> Precio Total</th>
+        <td mat-cell *matCellDef="let element"> {{element.precio}}</td>
+      </ng-container>
+      <ng-container matColumnDef="de">
+        <th class="th-e" mat-header-cell *matHeaderCellDef> Descripción</th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcion}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="op">
+        <th id="th-optioins" mat-header-cell *matHeaderCellDef> Opciones</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon>
+            <a (click)="editElement(element)" data-toggle="modal" data-target="#exampleModalScrollable">
+              edit
+            </a>
+          </mat-icon>
+          <mat-icon class="icon-options">
+            <a (click)="removeElement(element)">
+              delete
+            </a>
+          </mat-icon>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row style="color: blue" *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row style="color: blue" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div *ngIf="isLoadingTable" style="border-bottom: solid #d0c4bb 1px;">
+      <mat-spinner style="margin: auto auto;"></mat-spinner>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+  </form>
+  <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Green House</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="mx-5">
+            <h2 class="mt-3">{{textTitle}}</h2>
+
+            <!--            <div class="form-row">-->
+            <!--              <div class="col-md-12 mb-1">-->
+            <!--                <label for="validationServer03">IVA</label>-->
+            <!--                <input [(ngModel)]="input3" (input)="write2()" maxlength="8" type="text" class="form-control" id="validationServer03" required>-->
+            <!--                <div *ngIf="message2" class="text-danger">-->
+            <!--                  {{message2}}-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--            <div class="form-row">-->
+            <!--              <div class="col-md-12 mb-1">-->
+            <!--                <label>Cliente</label>-->
+            <!--                <select id="select1" class="custom-select">-->
+            <!--                  <option *ngFor="let item of clients">{{item.cliente.nombres+" "+item.cliente.apellidos+" "+item.cliente.dni}}</option>-->
+            <!--                </select>-->
+            <!--                <div *ngIf="message3" class="text-danger">-->
+            <!--                  {{message3}}-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
+
+            <div class="form-row">
+              <div class="col-md-12 mb-1">
+                <label for="validationServer01">Nombre del Cliente</label>
+                <input [(ngModel)]="input7" (input)="write7()" maxlength="30" type="text" class="form-control"
+                  id="validationServer07" required>
+                <div *ngIf="message7" class="text-danger">
+                  {{message7}}
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12 mb-1">
+                <label>Tipo de Documento</label>
+                <select id="select1" class="custom-select">
+                  <option *ngFor="let item of typesDocument">{{item.descripcion}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12 mb-1">
+                <label for="validationServer08">Dni del Cliente</label>
+                <input [(ngModel)]="input8" (input)="write8()" maxlength="20" type="text" maxlength="10"
+                  class="form-control" id="validationServer08" required>
+                <div *ngIf="message8" class="text-danger">
+                  {{message8}}
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12 mb-1">
+                <label for="validationServer09">Teléfono</label>
+                <input [(ngModel)]="input9" maxlength="15" type="text" maxlength="10" class="form-control"
+                  id="validationServer09" required>
+<!--                <div *ngIf="message9" class="text-danger">-->
+<!--                  {{message9}}-->
+<!--                </div>-->
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-12 mb-1">
+                <label for="validationServer01">Descripcion</label>
+                <textarea rows="4" [(ngModel)]="input1" maxlength="250" type="text" class="form-control"
+                  id="validationServer01" required></textarea>
+                <!--                <div *ngIf="message1" class="text-danger">-->
+                <!--                  {{message1}}-->
+                <!--                </div>-->
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12 mb-1">
+                <label for="validationServer02">Precio Total</label>
+                <input [(ngModel)]="input2" (input)="write1()" maxlength="8" type="text" class="form-control"
+                  id="validationServer02" required>
+                <div *ngIf="message2" class="text-danger">
+                  {{message2}}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row" style="display: inline-block">
+              <label>Platos Asociados</label>
+              <div *ngIf="message4" class="text-danger">
+                {{message4}}
+              </div>
+              <div class="form-check" *ngFor="let item of products">
+                <input [checked]="loadCheck(productsSelected, item)" (change)="check(item)" type="checkbox"
+                  class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">{{item.nombre}}</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <div class="text-center">
+            <button *ngIf="false" class="btn btn-primary" type="submit" data-dismiss="modal"></button>
+            <button (click)="save()" class="btn btn-primary" type="submit">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

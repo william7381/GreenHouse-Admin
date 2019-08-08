@@ -1,0 +1,11 @@
+th:first-child {
+  min-width: 4em;
+}
+
+.th-e {
+  min-width: 12em;
+}
+
+.th-ef {
+  min-width: 15em;
+}

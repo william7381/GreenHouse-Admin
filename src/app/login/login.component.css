@@ -1,0 +1,28 @@
+#div-login {
+  font-size: 20px;
+  padding-top: 5%;
+  padding-left: 40%;
+  height: 100vh;
+  border: 1px solid;
+  box-shadow: 5px 10px #ffffff;
+  background-color: rgb(255, 255, 255);
+}
+
+h1 {
+  text-align: left;
+  font-size: 30px;
+}
+
+button {
+  width: 45%;
+  height: 200%;
+}
+
+#div-content {
+  padding: 2em;
+  width: 40%;
+}
+
+label {
+  font-weight: bold;
+}

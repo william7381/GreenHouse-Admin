@@ -1,0 +1,16 @@
+th:first-child {
+  min-width: 4em;
+}
+
+.th-e {
+  min-width: 20em;
+}
+
+#th-options {
+  min-width: 15em;
+  text-align: center;
+}
+
+.icon-option{
+  text-align: center;
+}
