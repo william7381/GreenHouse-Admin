@@ -24,6 +24,7 @@ export class CitiesComponent implements OnInit, AfterViewInit {
   selectedEdit;
 
   textTitle;
+  input1Last: any;
 
   constructor(private myHttp: HttpClientService) {
     this.updateTable();
@@ -77,7 +78,8 @@ export class CitiesComponent implements OnInit, AfterViewInit {
     }
     const item = this.getItem();
     if (this.selectedEdit) {
-      this.myHttp.put('/ciudad', item).subscribe(
+      const numberSend = (this.input1Last + '').toUpperCase() === (this.input1 + '').toUpperCase() ? 0 : 1;
+      this.myHttp.put('/ciudad/' + numberSend, item).subscribe(
         data => {
           // @ts-ignore
           if (data.error && data.error === 1) {
@@ -104,7 +106,7 @@ export class CitiesComponent implements OnInit, AfterViewInit {
   }
 
   printEdit() {
-    this.input1 = this.selectedEdit.nombre;
+    this.input1 = this.input1Last = this.selectedEdit.nombre;
   }
 
   searchIndexOption(typesDocument: any[], tipoDocumento: any) {
@@ -117,7 +119,7 @@ export class CitiesComponent implements OnInit, AfterViewInit {
   }
 
   printCreate() {
-    this.input1 = '';
+    this.input1 = this.input1Last = '';
   }
 
   private search(value: string) {

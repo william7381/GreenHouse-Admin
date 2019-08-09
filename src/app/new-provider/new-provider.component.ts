@@ -37,6 +37,8 @@ export class NewProviderComponent implements OnInit, AfterViewInit {
   selectedEdit;
 
   textTitle;
+  input3Last: any;
+  input4Last: any;
 
   constructor(private myHttp: HttpClientService) {
     this.updateTable();
@@ -172,7 +174,9 @@ export class NewProviderComponent implements OnInit, AfterViewInit {
     }
     const item = this.getItem();
     if (this.selectedEdit) {
-      this.myHttp.put('/proveedor', item).subscribe(
+      const numberSend1 = (this.input3Last + '').toUpperCase() === (this.input3 + '').toUpperCase() ? 0 : 1;
+      const numberSend2 = (this.input4Last + '').toUpperCase() === (this.input4 + '').toUpperCase() ? 0 : 1;
+      this.myHttp.put('/proveedor/' + numberSend1 + '/' + numberSend2, item).subscribe(
         data => {
           // @ts-ignore
           if (data.error) {
@@ -213,8 +217,8 @@ export class NewProviderComponent implements OnInit, AfterViewInit {
   printEdit() {
     this.input1 = this.selectedEdit.nombres;
     this.input2 = this.selectedEdit.apellidos;
-    this.input3 = this.selectedEdit.dni;
-    this.input4 = this.selectedEdit.nombreComercial;
+    this.input3 = this.input3Last = this.selectedEdit.dni;
+    this.input4 = this.input4Last = this.selectedEdit.nombreComercial;
     this.input5 = this.selectedEdit.direccion;
     this.input6 = this.selectedEdit.telefono;
     const s1 = document.getElementById('select1');
@@ -228,8 +232,8 @@ export class NewProviderComponent implements OnInit, AfterViewInit {
   printCreate() {
     this.input1 = '';
     this.input2 = '';
-    this.input3 = '';
-    this.input4 = '';
+    this.input3 = this.input3Last = '';
+    this.input4 = this.input4Last = '';
     this.input5 = '';
     this.input6 = '';
     const s1 = document.getElementById('select1');

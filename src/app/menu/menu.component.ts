@@ -40,6 +40,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
   imagePath = '';
 
   resultImage: string | ArrayBuffer;
+  input1Last: any;
 
   constructor(private myHttp: HttpClientService) {
     this.updateTable();
@@ -201,7 +202,8 @@ export class MenuComponent implements OnInit, AfterViewInit {
     }
     const item = this.getItem();
     if (this.selectedEdit) {
-      this.myHttp.put('/plato', item).subscribe(
+      const numberSend = (this.input1Last + '').toUpperCase() === (this.input1 + '').toUpperCase() ? 0 : 1;
+      this.myHttp.put('/plato' + numberSend, item).subscribe(
         data => {
           // @ts-ignore
           if (data.error && data.error === 1) {
@@ -228,7 +230,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   printEdit() {
-    this.input1 = this.selectedEdit.nombre;
+    this.input1 = this.input1Last = this.selectedEdit.nombre;
     this.input2 = this.selectedEdit.descripcion;
     this.input3 = this.selectedEdit.precioVenta;
     this.input4 = this.selectedEdit.precioCosto;
@@ -253,7 +255,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   printCreate() {
-    this.input1 = '';
+    this.input1 = this.input1Last = '';
     this.input2 = '';
     this.input3 = '';
     this.input4 = '';

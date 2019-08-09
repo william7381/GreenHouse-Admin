@@ -24,6 +24,7 @@ export class TypesPlateComponent implements OnInit, AfterViewInit {
   selectedEdit;
 
   textTitle;
+  input1Last: any;
 
   constructor(private myHttp: HttpClientService) {
     this.updateTable();
@@ -77,7 +78,8 @@ export class TypesPlateComponent implements OnInit, AfterViewInit {
     }
     const item = this.getItem();
     if (this.selectedEdit) {
-      this.myHttp.put('/tipoProducto', item).subscribe(
+      const numberSend = (this.input1Last + '').toUpperCase() === (this.input1 + '').toUpperCase() ? 0 : 1;
+      this.myHttp.put('/tipoProducto/' + numberSend, item).subscribe(
         data => {
           // @ts-ignore
           if (data.error && data.error === 1) {
@@ -104,7 +106,7 @@ export class TypesPlateComponent implements OnInit, AfterViewInit {
   }
 
   printEdit() {
-    this.input1 = this.selectedEdit.descripcion;
+    this.input1 = this.input1Last = this.selectedEdit.descripcion;
   }
 
   searchIndexOption(typesDocument: any[], tipoDocumento: any) {
@@ -118,7 +120,7 @@ export class TypesPlateComponent implements OnInit, AfterViewInit {
 
 
   printCreate() {
-    this.input1 = '';
+    this.input1 = this.input1Last = '';
   }
 
   private search(value: string) {

@@ -33,6 +33,7 @@ export class InventoryComponent implements OnInit, AfterViewInit {
   selectedEdit;
 
   textTitle;
+  input1Last: any;
 
   constructor(private myHttp: HttpClientService) {
     this.updateTable();
@@ -141,7 +142,8 @@ export class InventoryComponent implements OnInit, AfterViewInit {
     }
     const item = this.getItem();
     if (this.selectedEdit) {
-      this.myHttp.put('/ingrediente', item).subscribe(
+      const numberSend = (this.input1Last + '').toUpperCase() === (this.input1 + '').toUpperCase() ? 0 : 1;
+      this.myHttp.put('/ingrediente/' + numberSend, item).subscribe(
         data => {
           // @ts-ignore
           if (data.error && data.error === 1) {
@@ -168,7 +170,7 @@ export class InventoryComponent implements OnInit, AfterViewInit {
   }
 
   printEdit() {
-    this.input1 = this.selectedEdit.nombre;
+    this.input1 = this.input1Last = this.selectedEdit.nombre;
     this.input2 = this.selectedEdit.descripcion;
     this.input3 = this.selectedEdit.stock;
     const s1 = document.getElementById('select1');
@@ -186,7 +188,7 @@ export class InventoryComponent implements OnInit, AfterViewInit {
   }
 
   printCreate() {
-    this.input1 = '';
+    this.input1 = this.input1Last = '';
     this.input2 = '';
     this.input3 = '';
     const s1 = document.getElementById('select1');
