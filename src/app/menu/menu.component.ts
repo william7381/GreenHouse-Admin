@@ -203,7 +203,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
     const item = this.getItem();
     if (this.selectedEdit) {
       const numberSend = (this.input1Last + '').toUpperCase() === (this.input1 + '').toUpperCase() ? 0 : 1;
-      this.myHttp.put('/plato' + numberSend, item).subscribe(
+      this.myHttp.put('/plato/' + numberSend, item).subscribe(
         data => {
           // @ts-ignore
           if (data.error && data.error === 1) {
